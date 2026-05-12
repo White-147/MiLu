@@ -38,7 +38,7 @@ $launchCmd = @"
 Set-Location '$repoRoot'
 `$env:MILU_WORKING_DIR='$repoRoot'
 `$env:MILU_SECRET_DIR='$($env:MILU_SECRET_DIR)'
-python -m uvicorn copaw.app._app:app --host $BindHost --port $Port *>> '$logFile'
+python -m uvicorn milu.app._app:app --host $BindHost --port $Port *>> '$logFile'
 "@
 $proc = Start-Process -FilePath "powershell.exe" `
     -ArgumentList "-WindowStyle", "Hidden", "-Command", $launchCmd `

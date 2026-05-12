@@ -1,22 +1,25 @@
 version: '3.8'
 
 volumes:
-  copaw-data:
-    name: copaw-data
-  copaw-secrets:
-    name: copaw-secrets
+  milu-assistant-web-data:
+    name: milu-assistant-web-data
+  milu-assistant-web-secrets:
+    name: milu-assistant-web-secrets
 
 services:
-  copaw:
-    image: agentscope/copaw:latest
-    container_name: copaw
+  milu-assistant-web:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+    image: milu-assistant-web:latest
+    container_name: milu-assistant-web
     restart: always
     ports:
       - "127.0.0.1:8088:8088"
     # environment:
-    #   - COPAW_AUTH_ENABLED=true
-    #   - COPAW_AUTH_USERNAME=admin
-    #   - COPAW_AUTH_PASSWORD=yourpassword
+    #   - MILU_AUTH_ENABLED=true
+    #   - MILU_AUTH_USERNAME=admin
+    #   - MILU_AUTH_PASSWORD=yourpassword
     volumes:
-      - copaw-data:/app/working
-      - copaw-secrets:/app/working.secret
+      - milu-assistant-web-data:/app/working
+      - milu-assistant-web-secrets:/app/working.secret
